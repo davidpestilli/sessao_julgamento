@@ -1,0 +1,24 @@
+/* src/components/DualFlowchart/DualFlowchart.css */
+.dual-flowchart-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Garante que tudo caiba na altura da tela */
+  overflow: hidden; /* Evita que nada saia da tela */
+}
+
+.upper-flowchart-container,
+.lower-flowchart-container {
+  flex: 1; /* Cada um ocupa metade da tela */
+  border: 2px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  overflow: hidden; /* Evita barras de rolagem desnecessárias */
+}
+
+.flowchart-diagram {
+  width: 100%;
+  height: 100%;
+}
+
+
+  
