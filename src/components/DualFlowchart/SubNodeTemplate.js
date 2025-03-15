@@ -1,11 +1,9 @@
-// src/components/DualFlowchart/SubNodeTemplate.js
 import * as go from 'gojs';
+import { updateSubNodeColors } from './SubNodeSelectionHandler';
 
 export const createSubNodeTemplate = (setSelectedNode) => {
   const $ = go.GraphObject.make;
-  return $(
-    go.Node,
-    "Auto",
+  return $(go.Node, "Auto",
     {
       selectionAdorned: false,
       shadowOffset: new go.Point(4, 4),
@@ -14,31 +12,29 @@ export const createSubNodeTemplate = (setSelectedNode) => {
       mouseEnter: (e, node) => {
         node.diagram.startTransaction("hover");
         node.scale = 1.05;
-        node.findObject("SHAPE").stroke = "#3182ce";
+        node.findObject("SHAPE").stroke = "#5D3F6A"; // 🔮 Roxo escuro na borda
         node.diagram.commitTransaction("hover");
       },
       mouseLeave: (e, node) => {
         node.diagram.startTransaction("hover");
         node.scale = 1.0;
-        node.findObject("SHAPE").stroke = "#4a5568";
+        node.findObject("SHAPE").stroke = "#5D3F6A"; // Mantém borda roxo escuro
         node.diagram.commitTransaction("hover");
       },
       click: (e, node) => {
-        node.diagram.startTransaction("pressed");
-        node.scale = 0.95;
-        node.diagram.commitTransaction("pressed");
-        setTimeout(() => {
-          node.diagram.startTransaction("pressed");
-          node.scale = 1.05;
-          node.diagram.commitTransaction("pressed");
-        }, 100);
-        setSelectedNode(node.data);
+        if (setSelectedNode) {
+          setSelectedNode(node.data);
+        }
+        console.log(`🖱️ Nó clicado na LowerFlowchart: ${node.data.key}`);
+        
+        // 🔥 Atualiza as cores corretamente ao selecionar um nó
+        updateSubNodeColors(node.diagram, node.data.key);
       }
     },
     $(go.Shape, "RoundedRectangle", {
       name: "SHAPE",
-      fill: "#38A169",
-      stroke: "#4a5568",
+      fill: "#9B59B6", // 🟣 Roxo Suave
+      stroke: "#5D3F6A", // 🔮 Borda Roxo Escuro
       strokeWidth: 2,
     }),
     $(go.TextBlock, {

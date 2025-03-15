@@ -2,103 +2,59 @@
 import React, { useRef, useEffect } from 'react';
 import * as go from 'gojs';
 import flowchartData from '../../data/flowchartData';
+import { updateUpperNodeColors } from './UpperNodeSelectionHandler';
+import { createUpperNodeTemplate } from './UpperNodeTemplate';
 
 const UpperFlowchart = ({ onNodeSelect }) => {
-    const diagramRef = useRef(null);
-    const diagramInstance = useRef(null);
+  const diagramRef = useRef(null);
+  const diagramInstance = useRef(null);
+  const selectedNodeRef = useRef(null); // 🔥 Evita re-renderizações
 
-    useEffect(() => {
-        const $ = go.GraphObject.make;
-        const container = diagramRef.current;
+  useEffect(() => {
+    if (diagramInstance.current) {
+      console.log("⚠️ Diagrama UpperFlowchart já inicializado, evitando recriação!");
+      return;
+    }
 
-        console.log("UpperFlowchart está sendo renderizado");
-        console.log("Container encontrado:", diagramRef.current);
+    console.log("🎨 Criando o diagrama UpperFlowchart...");
 
-        if (diagramInstance.current) {
-            diagramInstance.current.div = null;
+    const $ = go.GraphObject.make;
+    const container = diagramRef.current;
+
+    const diagram = $(go.Diagram, container, {
+      'undoManager.isEnabled': true,
+      layout: $(go.LayeredDigraphLayout, { direction: 0, layerSpacing: 50 }),
+      padding: new go.Margin(10, 10, 10, 10),
+    });
+
+    diagramInstance.current = diagram;
+
+    diagram.nodeTemplate = createUpperNodeTemplate((nodeData) => {
+      if (onNodeSelect) {
+        if (selectedNodeRef.current === nodeData.key) {
+          onNodeSelect(null);
+          updateUpperNodeColors(diagramInstance.current, null);
+          selectedNodeRef.current = null;
+        } else {
+          onNodeSelect(nodeData);
+          updateUpperNodeColors(diagramInstance.current, nodeData.key);
+          selectedNodeRef.current = nodeData.key;
         }
-        const diagram = $(go.Diagram, container, {
-            'undoManager.isEnabled': true,
-            layout: $(go.LayeredDigraphLayout, { direction: 0, layerSpacing: 50 }),
-            padding: new go.Margin(10, 10, 10, 10),
-        });
+      }
+    });
 
-        console.log("Diagrama criado:", diagram);
+    diagram.model = new go.GraphLinksModel(flowchartData.nodeDataArray, flowchartData.linkDataArray);
 
-        diagramInstance.current = diagram;
+    console.log("✅ Diagrama UpperFlowchart criado!");
 
-        // Template dos nós com comportamento de zoom, mudança de cor e callback na seleção
-        diagram.nodeTemplate = $(
-          go.Node,
-          "Auto",
-          {
-            selectionAdorned: false,
-            shadowOffset: new go.Point(4, 4),
-            shadowColor: "rgba(0, 0, 0, 0.15)",
-            shadowBlur: 10,
-            mouseEnter: (e, node) => {
-                node.diagram.startTransaction("hover");
-                node.scale = 1.05;
-                node.findObject("SHAPE").stroke = "#3182ce";
-                node.diagram.commitTransaction("hover");
-            },
-            mouseLeave: (e, node) => {
-                node.diagram.startTransaction("hover");
-                node.scale = 1.0;
-                node.findObject("SHAPE").stroke = "#4a5568";
-                node.diagram.commitTransaction("hover");
-            },
-            click: (e, node) => {
-                node.diagram.startTransaction("pressed");
-                node.scale = 0.95;
-                node.diagram.commitTransaction("pressed");
-                setTimeout(() => {
-                    node.diagram.startTransaction("pressed");
-                    node.scale = 1.05;
-                    node.diagram.commitTransaction("pressed");
-                }, 100);
-                if (onNodeSelect) {
-                    onNodeSelect(node.data);
-                }
-            }
-          },
-          $(go.Shape, "RoundedRectangle", {
-            name: "SHAPE",
-            fill: "#38A169",
-            stroke: "#4a5568",
-            strokeWidth: 2,
-          }),
-          $(go.TextBlock, {
-            margin: 10,
-            font: "14px sans-serif",
-            textAlign: "center",
-            wrap: go.TextBlock.WrapFit,
-            minSize: new go.Size(100, 30),
-            verticalAlignment: go.Spot.Center,
-          }, new go.Binding("text", "text"))
-        );
+    diagram.addDiagramListener("BackgroundSingleClicked", () => {
+      selectedNodeRef.current = null;
+      updateUpperNodeColors(diagramInstance.current, null);
+    });
 
-        diagram.model = new go.GraphLinksModel(
-            flowchartData.nodeDataArray,
-            flowchartData.linkDataArray
-        );
+  }, []);
 
-        console.log("Dados do fluxo:", flowchartData);
-
-
-        // Limpa a seleção ao clicar no fundo
-        diagram.addDiagramListener("BackgroundSingleClicked", (e) => {
-            if (onNodeSelect) {
-                onNodeSelect(null);
-            }
-        });
-
-        return () => {
-            diagram.div = null;
-        };
-    }, [onNodeSelect]);
-
-    return <div className="flowchart-diagram" ref={diagramRef}></div>;
+  return <div className="flowchart-diagram" ref={diagramRef}></div>;
 };
 
 export default UpperFlowchart;

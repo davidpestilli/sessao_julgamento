@@ -1,58 +1,45 @@
-// src/components/DualFlowchart/LowerFlowchart.js
-import React, { useRef, useEffect, useState } from 'react';
-import * as go from 'gojs';
+import React, { useRef, useEffect } from 'react';
 import subFlowchartData from '../../data/subFlowchartData';
-import { createSubNodeTemplate } from './SubNodeTemplate';
-import { updateSubNodeColors } from './SubNodeSelectionHandler';
+import { initializeLowerDiagram } from './initializeLowerDiagram';
+import { updateLowerDiagramData } from './updateLowerDiagramData';
 
 const LowerFlowchart = ({ selectedUpperNodeKey }) => {
   const diagramRef = useRef(null);
   const diagramInstance = useRef(null);
-  const [selectedNode, setSelectedNode] = useState(null);
+  const selectedNodeRef = useRef(null);
+
+  console.log("🔄 LowerFlowchart renderizou! Nó selecionado no UpperFlowchart:", selectedUpperNodeKey);
 
   useEffect(() => {
-    const $ = go.GraphObject.make;
-    const container = diagramRef.current;
     if (diagramInstance.current) {
-      diagramInstance.current.div = null;
-    }
-    const diagram = $(go.Diagram, container, {
-      'undoManager.isEnabled': true,
-      layout: $(go.LayeredDigraphLayout, { direction: 0, layerSpacing: 50 }),
-      padding: new go.Margin(10, 10, 10, 10),
-    });
-    diagramInstance.current = diagram;
-    diagram.nodeTemplate = createSubNodeTemplate(setSelectedNode);
-
-    // Carrega os dados do subfluxo a partir da chave do nó selecionado
-    const data = selectedUpperNodeKey && subFlowchartData[selectedUpperNodeKey];
-    if (data) {
-      diagram.model = new go.GraphLinksModel(
-        data.nodeDataArray,
-        data.linkDataArray
-      );
-    } else {
-      diagram.model = new go.GraphLinksModel([], []);
+      console.log("⚠️ Diagrama LowerFlowchart já inicializado, evitando recriação!");
+      return;
     }
 
-    diagram.addDiagramListener("BackgroundSingleClicked", () => {
-      setSelectedNode(null);
+    diagramInstance.current = initializeLowerDiagram(diagramRef, (node) => {
+      selectedNodeRef.current = node;
     });
+  }, []);
 
-    return () => {
-      diagram.div = null;
-    };
+  useEffect(() => {
+    if (!diagramInstance.current) {
+      console.log("⚠️ LowerFlowchart: Tentativa de atualização antes da inicialização.");
+      return;
+    }
+
+    console.log("🔁 Atualizando LowerFlowchart com o nó selecionado:", selectedUpperNodeKey);
+
+    const data = selectedUpperNodeKey ? subFlowchartData[selectedUpperNodeKey] : null;
+
+    if (!data) {
+      console.log("⚠️ LowerFlowchart: Nenhum dado encontrado para a chave selecionada.");
+      return;
+    }
+
+    updateLowerDiagramData(diagramInstance.current, data, selectedNodeRef.current);
   }, [selectedUpperNodeKey]);
 
-  useEffect(() => {
-    if (diagramInstance.current) {
-      updateSubNodeColors(diagramInstance.current, selectedNode ? selectedNode.key : null);
-    }
-  }, [selectedNode]);
-
-  return (
-    <div className="flowchart-diagram" ref={diagramRef}></div>
-  );
+  return <div className="flowchart-diagram" ref={diagramRef}></div>;
 };
 
 export default LowerFlowchart;
