@@ -45,6 +45,7 @@ const UpperFlowchart = ({ onNodeSelect, selectedUpperNode, setSelectedUpperNode,
   }, [onNodeSelect, setSelectedUpperNode]);
 
   const handleButtonClick = () => {
+    console.log("📌 UpperFlowchart: Botão 'Conteúdo' pressionado.");
     setIsUpperModalOpen(true);
   };
 

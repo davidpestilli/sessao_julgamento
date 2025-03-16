@@ -56,6 +56,7 @@ const LowerFlowchart = ({ selectedUpperNodeKey }) => {
   }, [selectedUpperNodeKey]);
 
   const handleButtonClick = () => {
+    console.log("📌 LowerFlowchart: Botão 'Conteúdo' pressionado.");
     setIsModalOpen(true);
   };
 
