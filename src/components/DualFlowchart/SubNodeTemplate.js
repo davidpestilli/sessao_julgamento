@@ -41,9 +41,10 @@ export const createSubNodeTemplate = (setSelectedNode) => {
       margin: 10,
       font: "14px sans-serif",
       textAlign: "center",
-      wrap: go.TextBlock.WrapFit,
-      minSize: new go.Size(100, 30),
+      wrap: go.TextBlock.WrapFit, // 🔥 Habilita a quebra de texto automática
+      maxSize: new go.Size(120, NaN), // 🔥 Define uma largura máxima para forçar a quebra
       verticalAlignment: go.Spot.Center,
     }, new go.Binding("text", "text"))
+    
   );
 };
