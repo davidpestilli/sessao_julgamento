@@ -1,6 +1,5 @@
 import * as go from 'gojs';
 import { createSubNodeTemplate } from './SubNodeTemplate';
-import { updateSubNodeColors } from './SubNodeSelectionHandler';
 
 export function initializeLowerDiagram(diagramRef, setSelectedNode) {
   console.log("🎨 Criando o diagrama LowerFlowchart...");
@@ -16,16 +15,13 @@ export function initializeLowerDiagram(diagramRef, setSelectedNode) {
 
   diagram.model = new go.GraphLinksModel();
   diagram.model.linkKeyProperty = "key";
-
   diagram.nodeTemplate = createSubNodeTemplate(setSelectedNode);
 
   console.log("✅ Diagrama LowerFlowchart criado com sucesso!");
 
-  // 🔥 Garante que ao clicar fora, os nós voltam ao roxo
   diagram.addDiagramListener("BackgroundSingleClicked", () => {
-    console.log("🖱️ Clique no fundo do LowerFlowchart → Resetando cores.");
+    console.log("🖱️ Clique no fundo do LowerFlowchart → Resetando seleção.");
     setSelectedNode(null);
-    updateSubNodeColors(diagram, null);
   });
 
   return diagram;

@@ -4,30 +4,45 @@ import LowerFlowchart from './LowerFlowchart';
 import './DualFlowchart.css';
 
 const DualFlowchart = () => {
-  const [selectedNode, setSelectedNode] = useState(null);
-  const [upperFlowchartKey, setUpperFlowchartKey] = useState(0);
+  const [selectedUpperNode, setSelectedUpperNode] = useState(null);
+  const [isUpperModalOpen, setIsUpperModalOpen] = useState(false);
+  const [resetKey, setResetKey] = useState(0); // Para forçar re-render
 
   const resetFlowcharts = () => {
-    setSelectedNode(null);
-    setUpperFlowchartKey(prevKey => prevKey + 1);
+    console.log("🔄 Resetando fluxogramas...");
+    setSelectedUpperNode(null);
+    setIsUpperModalOpen(false);
+    setResetKey(Date.now()); // Gera uma nova chave para recriar os componentes
   };
 
   return (
     <div className="dual-flowchart-container">
+      {/* Botão Reset com alto z-index */}
       <div className="reset-container" onClick={resetFlowcharts}>
         🔄
         <span>Resetar</span>
       </div>
-      
-      {/* 🔳 Bloqueando os textos de avaliação */}
+
+      {/* Watermark blockers para cobrir mensagens do GoJS */}
       <div className="watermark-blocker blocker-top"></div>
       <div className="watermark-blocker blocker-bottom"></div>
 
+      {/* Upper e Lower Charts - Agora com a chave para re-renderizar */}
       <div className="upper-flowchart-container">
-        <UpperFlowchart key={upperFlowchartKey} onNodeSelect={setSelectedNode} />
+        <UpperFlowchart
+          key={resetKey} // 🚀 Força a recriação do UpperFlowchart
+          onNodeSelect={(node) => {
+            console.log("Upper node selected:", node);
+            setSelectedUpperNode(node);
+          }}
+          selectedUpperNode={selectedUpperNode}
+          setSelectedUpperNode={setSelectedUpperNode}
+          isUpperModalOpen={isUpperModalOpen}
+          setIsUpperModalOpen={setIsUpperModalOpen}
+        />
       </div>
       <div className="lower-flowchart-container">
-        <LowerFlowchart key={upperFlowchartKey} selectedUpperNodeKey={selectedNode ? selectedNode.key : null} />
+        <LowerFlowchart key={resetKey} selectedUpperNodeKey={selectedUpperNode ? selectedUpperNode.key : null} />
       </div>
     </div>
   );

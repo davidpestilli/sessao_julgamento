@@ -1,9 +1,11 @@
 /* src/components/DualFlowchart/DualFlowchart.css */
 .dual-flowchart-container {
+  position: relative; /* necessário para que elementos absolutos dentro fiquem referenciados */
+  z-index: 0;
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Garante que tudo caiba na altura da tela */
-  overflow: hidden; /* Evita que nada saia da tela */
+  height: 100vh;
+  overflow: hidden;
 }
 
 .upper-flowchart-container,
@@ -15,12 +17,23 @@
   overflow: hidden; /* Evita barras de rolagem desnecessárias */
 }
 
+.flowchart-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .flowchart-diagram {
   width: 100%;
   height: 100%;
 }
 
+/* Reset container com alto z-index para ficar visível acima dos outros elementos */
 .reset-container {
+  position: absolute;
+  top: 10px;
+  right: 1060px;
+  z-index: 1001;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,11 +45,11 @@
 }
 
 .reset-container:hover {
-  transform: scale(1.1); /* Aumenta um pouco ao passar o mouse */
+  transform: scale(1.1);
 }
 
 .reset-container:active {
-  transform: scale(0.9) rotate(15deg); /* Reduz um pouco e inclina ao clicar */
+  transform: scale(0.9) rotate(15deg);
   opacity: 0.7;
 }
 
@@ -48,31 +61,60 @@
 }
 
 .reset-container:hover span {
-  color: #007BFF; /* Muda a cor do texto ao passar o mouse */
+  color: #007BFF;
 }
 
+/* Watermark blockers também com alto z-index */
 .watermark-blocker {
   position: absolute;
-  background-color: rgb(253, 253, 253);
-  width: 280px;  /* Ajuste o tamanho conforme necessário */
-  height: 80px;  /* Ajuste o tamanho conforme necessário */
-  z-index: 5;
-  pointer-events: none; /* Evita que interfira com cliques */
+  background-color: rgb(255, 255, 255);
+  width: 280px;
+  height: 80px;
+  z-index: 1000; /* menor que o reset para que o reset fique acima */
+  pointer-events: none;
 }
 
 .blocker-top {
-  top: 85px;  /* Ajuste conforme necessário para cobrir a parte superior */
+  top: 10px;
   left: 2%;
   transform: translateX(-50%);
 }
 
 .blocker-bottom {
-  bottom: 380px;  /* Ajuste conforme necessário para cobrir a parte inferior */
+  bottom: 415px;
   left: 2%;
   transform: translateX(-50%);
 }
 
+.content-button {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #6C5CE7;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  animation: buttonReload 0.5s ease-out;
+}
 
+.content-button:hover {
+  background: #4E44CE;
+}
 
+@keyframes buttonReload {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
 
   

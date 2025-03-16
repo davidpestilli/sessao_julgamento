@@ -1,26 +1,23 @@
-// src/components/DualFlowchart/UpperFlowchart.js
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as go from 'gojs';
 import flowchartData from '../../data/flowchartData';
 import { updateUpperNodeColors } from './UpperNodeSelectionHandler';
 import { createUpperNodeTemplate } from './UpperNodeTemplate';
+import NodeModal from './NodeModal';
 
-const UpperFlowchart = ({ onNodeSelect }) => {
+const UpperFlowchart = ({ onNodeSelect, selectedUpperNode, setSelectedUpperNode, isUpperModalOpen, setIsUpperModalOpen }) => {
   const diagramRef = useRef(null);
   const diagramInstance = useRef(null);
-  const selectedNodeRef = useRef(null); // 🔥 Evita re-renderizações
+  const [buttonKey, setButtonKey] = useState(0);
 
   useEffect(() => {
     if (diagramInstance.current) {
-      console.log("⚠️ Diagrama UpperFlowchart já inicializado, evitando recriação!");
+      console.log("⚠️ UpperFlowchart: Diagrama já inicializado.");
       return;
     }
 
-    console.log("🎨 Criando o diagrama UpperFlowchart...");
-
     const $ = go.GraphObject.make;
     const container = diagramRef.current;
-
     const diagram = $(go.Diagram, container, {
       'undoManager.isEnabled': true,
       layout: $(go.LayeredDigraphLayout, { direction: 0, layerSpacing: 50 }),
@@ -29,32 +26,43 @@ const UpperFlowchart = ({ onNodeSelect }) => {
 
     diagramInstance.current = diagram;
 
+    // Cria o template do nó com o callback que atualiza a seleção e a cor
     diagram.nodeTemplate = createUpperNodeTemplate((nodeData) => {
-      if (onNodeSelect) {
-        if (selectedNodeRef.current === nodeData.key) {
-          onNodeSelect(null);
-          updateUpperNodeColors(diagramInstance.current, null);
-          selectedNodeRef.current = null;
-        } else {
-          onNodeSelect(nodeData);
-          updateUpperNodeColors(diagramInstance.current, nodeData.key);
-          selectedNodeRef.current = nodeData.key;
-        }
-      }
+      console.log("🔔 Nó da upper chart clicado:", nodeData);
+      setSelectedUpperNode(nodeData);
+      onNodeSelect(nodeData);
+      updateUpperNodeColors(diagram, nodeData.key);
+      // Atualiza o buttonKey para forçar a re-montagem do botão e disparar a animação
+      setButtonKey(Date.now());
     });
 
     diagram.model = new go.GraphLinksModel(flowchartData.nodeDataArray, flowchartData.linkDataArray);
 
-    console.log("✅ Diagrama UpperFlowchart criado!");
-
     diagram.addDiagramListener("BackgroundSingleClicked", () => {
-      selectedNodeRef.current = null;
-      updateUpperNodeColors(diagramInstance.current, null);
+      setSelectedUpperNode(null);
+      updateUpperNodeColors(diagram, null);
     });
+  }, [onNodeSelect, setSelectedUpperNode]);
 
-  }, []);
+  const handleButtonClick = () => {
+    setIsUpperModalOpen(true);
+  };
 
-  return <div className="flowchart-diagram" ref={diagramRef}></div>;
+  return (
+    <div className="flowchart-container">
+      <div className="flowchart-diagram" ref={diagramRef}></div>
+      {selectedUpperNode && (
+        <button key={buttonKey} className="content-button" onClick={handleButtonClick}>
+          Conteúdo
+        </button>
+      )}
+      <NodeModal
+        isOpen={isUpperModalOpen}
+        onClose={() => setIsUpperModalOpen(false)}
+        content={selectedUpperNode ? `Informações sobre o nó: ${selectedUpperNode.text}` : "Nenhum nó selecionado"}
+      />
+    </div>
+  );
 };
 
 export default UpperFlowchart;

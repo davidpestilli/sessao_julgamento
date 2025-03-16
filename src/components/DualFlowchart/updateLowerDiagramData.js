@@ -1,34 +1,34 @@
+import * as go from 'gojs';
 import { updateSubNodeColors } from './SubNodeSelectionHandler';
 
-/**
- * Atualiza os dados do LowerFlowchart sem recriar o diagrama.
- * @param {go.Diagram} diagram - Instância do diagrama GoJS.
- * @param {Object} data - Dados do fluxo a serem atualizados.
- * @param {Object} selectedNode - Nó atualmente selecionado.
- */
-export function updateLowerDiagramData(diagram, data, selectedNode) {
+export function updateLowerDiagramData(diagram, data) {
   if (!diagram) return;
 
   console.log("🔁 Atualizando LowerFlowchart...");
+  console.log("📊 Dados recebidos para atualização:", data);
 
-  setTimeout(() => {
-    diagram.startTransaction("updateModel");
+  if (diagram.isTransactionInProgress) {
+    console.warn("⚠️ Uma transação ainda ativa! Cancelando antes de atualizar...");
+    diagram.rollbackTransaction();
+  }
 
-    diagram.model.mergeNodeDataArray(data ? data.nodeDataArray : []);
+  if (!data || !data.nodeDataArray || data.nodeDataArray.length === 0) {
+    console.log("⚠️ Nenhum nó disponível. Limpando o diagrama.");
+    diagram.clear();
+    return;
+  }
 
-    if (data && data.linkDataArray) {
-      const updatedLinks = data.linkDataArray.map((link, index) => ({
-        ...link,
-        key: link.key || `link-${index}-${link.from}-${link.to}`,
-      }));
-      diagram.model.mergeLinkDataArray(updatedLinks);
+  const updateModel = () => {
+    if (diagram.isTransactionInProgress) {
+      console.warn("⚠️ Transação ainda ativa! Agendando nova tentativa...");
+      setTimeout(updateModel, 50);
+      return;
     }
-
-    diagram.commitTransaction("updateModel");
-
-    console.log("✅ LowerFlowchart atualizado com sucesso!");
-
-    // 🔥 Garante que ao trocar de fluxo, todos os nós começam verdes
+    console.log("🛠️ Resetando e atualizando o modelo do diagrama...");
+    diagram.model = new go.GraphLinksModel(data.nodeDataArray, data.linkDataArray);
     updateSubNodeColors(diagram, null);
-  }, 0);
+    console.log("✅ LowerFlowchart atualizado com sucesso!");
+  };
+
+  setTimeout(updateModel, 50);
 }
