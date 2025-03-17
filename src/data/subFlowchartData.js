@@ -85,18 +85,20 @@ const subFlowchartData = {
   pos: {
     nodeDataArray: [
       { key: 'sub-pos-1', text: 'Pedido de Vista' },
-      { key: 'sub-pos-2', text: 'Julgamento Sobrestado (Art. 942 CPC)' },
-      { key: 'sub-pos-3', text: 'Julgamento Adiado e Retirado de Pauta' },
-      { key: 'sub-pos-4', text: 'Conferência da Sessão de Julgamento' },
-      { key: 'sub-pos-5', text: 'Encerramento da Ata' },
-      { key: 'sub-pos-6', text: 'Retificação de Ata' }
+      { key: 'sub-pos-2', text: 'Julgamento por Maioria' },
+      { key: 'sub-pos-3', text: 'Julgamento Sobrestado (Art. 942 CPC)' },
+      { key: 'sub-pos-4', text: 'Julgamento Adiado e Retirado de Pauta' },
+      { key: 'sub-pos-5', text: 'Conferência da Sessão de Julgamento' },
+      { key: 'sub-pos-6', text: 'Encerramento da Ata' },
+      { key: 'sub-pos-7', text: 'Retificação de Ata' }
     ],
     linkDataArray: [
       { from: 'sub-pos-1', to: 'sub-pos-2' },
       { from: 'sub-pos-2', to: 'sub-pos-3' },
       { from: 'sub-pos-3', to: 'sub-pos-4' },
       { from: 'sub-pos-4', to: 'sub-pos-5' },
-      { from: 'sub-pos-5', to: 'sub-pos-6' }
+      { from: 'sub-pos-5', to: 'sub-pos-6' },
+      { from: 'sub-pos-6', to: 'sub-pos-7' }
     ]
   }
 };

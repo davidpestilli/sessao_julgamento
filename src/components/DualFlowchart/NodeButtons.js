@@ -3,17 +3,17 @@ import React from 'react';
 const NodeButtons = ({ texts, isUpperChart, onEdit, onDisplay }) => {
     return (
         <>
-            <button className="modal-button" onClick={() => onDisplay("Por que importa?", texts.whyImportant)}>
-                Por que importa?
+            <button className="modal-button" onClick={() => onDisplay("Por que esse serviço importa?", texts.whyImportant)}>
+                Por que esse serviço importa?
             </button>
 
-            <button className="modal-button" onClick={() => onDisplay("Quem faz?", texts.whoDoes)}>
-                Quem faz?
+            <button className="modal-button" onClick={() => onDisplay("Quem faz esse serviço?", texts.whoDoes)}>
+                Quem faz esse serviço?
             </button>
 
-            {!isUpperChart && ( // 🔹 "Como faz?" só aparece na Lower Chart
-                <button className="modal-button" onClick={() => onDisplay("Como faz?", texts.howDoes)}>
-                    Como faz?
+            {!isUpperChart && ( // 🔹 "Como esse serviço é feito?" só aparece na Lower Chart
+                <button className="modal-button" onClick={() => onDisplay("Como esse serviço é feito?", texts.howDoes)}>
+                    Como esse serviço é feito?
                 </button>
             )}
 
@@ -23,7 +23,5 @@ const NodeButtons = ({ texts, isUpperChart, onEdit, onDisplay }) => {
         </>
     );
 };
-
-
 
 export default NodeButtons;
