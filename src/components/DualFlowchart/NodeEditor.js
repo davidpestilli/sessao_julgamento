@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from '../../supabaseClient';
+import { marked } from 'marked';
 
 const NodeEditor = ({ nodeKey, texts, isUpperChart, setTexts, onClose }) => {
     const [newTexts, setNewTexts] = useState({});
@@ -10,61 +11,63 @@ const NodeEditor = ({ nodeKey, texts, isUpperChart, setTexts, onClose }) => {
     };
 
     // Salvar edições no Supabase
-    async function saveChanges() {
-        if (!nodeKey) {
-            console.error("❌ ERRO: nodeKey não foi definido.");
+// Salvar edições no Supabase
+async function saveChanges() {
+    if (!nodeKey) {
+        console.error("❌ ERRO: nodeKey não foi definido.");
+        return;
+    }
+
+    // Aplicar a conversão para Markdown nos textos antes de salvar
+    const updates = {
+        why_important: newTexts.whyImportant || texts.whyImportant,
+        who_does: newTexts.whoDoes || texts.whoDoes, // 🔹 Adicionar sempre "Quem faz?"
+        how_does: newTexts.howDoes || texts.howDoes, // 🔹 Adicionar sempre "Como faz?"
+    };
+
+    console.log("📡 Verificando se node_key existe no banco:", nodeKey);
+
+    // 🔹 Primeiro, verificamos se o registro já existe
+    let { data: existingData, error: fetchError } = await supabase
+        .from('flowchart_texts')
+        .select('node_key')
+        .eq('node_key', nodeKey)
+        .single();
+
+    if (fetchError) {
+        console.warn(`⚠️ Nenhum registro encontrado para node_key: ${nodeKey}. Criando um novo.`);
+        // 🔹 Se não encontrou, cria um novo registro
+        const { error: insertError } = await supabase
+            .from('flowchart_texts')
+            .insert([{ node_key: nodeKey, ...updates }]);
+
+        if (insertError) {
+            console.error("❌ ERRO AO INSERIR NOVO REGISTRO:", insertError.message);
             return;
         }
-    
-        const updates = {
-            why_important: newTexts.whyImportant || texts.whyImportant,
-            who_does: newTexts.whoDoes || texts.whoDoes, // 🔹 Adicionar sempre "Quem faz?"
-            how_does: newTexts.howDoes || texts.howDoes, // 🔹 Adicionar sempre "Como faz?"
-        };
-        
-    
-        console.log("📡 Verificando se node_key existe no banco:", nodeKey);
-    
-        // 🔹 Primeiro, verificamos se o registro já existe
-        let { data: existingData, error: fetchError } = await supabase
+
+        console.log("✅ Novo registro criado com sucesso!");
+    } else {
+        console.log("✅ Registro encontrado! Atualizando...");
+
+        // 🔹 Se o registro já existe, apenas atualiza
+        const { error: updateError } = await supabase
             .from('flowchart_texts')
-            .select('node_key')
-            .eq('node_key', nodeKey)
-            .single();
-    
-        if (fetchError) {
-            console.warn(`⚠️ Nenhum registro encontrado para node_key: ${nodeKey}. Criando um novo.`);
-            // 🔹 Se não encontrou, cria um novo registro
-            const { error: insertError } = await supabase
-                .from('flowchart_texts')
-                .insert([{ node_key: nodeKey, ...updates }]);
-    
-            if (insertError) {
-                console.error("❌ ERRO AO INSERIR NOVO REGISTRO:", insertError.message);
-                return;
-            }
-    
-            console.log("✅ Novo registro criado com sucesso!");
-        } else {
-            console.log("✅ Registro encontrado! Atualizando...");
-    
-            // 🔹 Se o registro já existe, apenas atualiza
-            const { error: updateError } = await supabase
-                .from('flowchart_texts')
-                .update(updates)
-                .eq('node_key', nodeKey);
-    
-            if (updateError) {
-                console.error("❌ ERRO AO ATUALIZAR REGISTRO:", updateError.message);
-                return;
-            }
-    
-            console.log("✅ Dados atualizados com sucesso!");
+            .update(updates)
+            .eq('node_key', nodeKey);
+
+        if (updateError) {
+            console.error("❌ ERRO AO ATUALIZAR REGISTRO:", updateError.message);
+            return;
         }
-    
-        setTexts(updates);
-        onClose();
+
+        console.log("✅ Dados atualizados com sucesso!");
     }
+
+    // Atualizar os textos e fechar o modal
+    setTexts(updates);
+    onClose();
+}
     
 
     return (

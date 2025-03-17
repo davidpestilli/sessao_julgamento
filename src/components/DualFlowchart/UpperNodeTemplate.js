@@ -1,4 +1,5 @@
 import * as go from 'gojs';
+import { marked } from 'marked';
 
 export const createUpperNodeTemplate = (onNodeSelect) => {
     const $ = go.GraphObject.make;
@@ -32,12 +33,16 @@ export const createUpperNodeTemplate = (onNodeSelect) => {
             strokeWidth: 2,
         }),
         $(go.TextBlock, {
-            margin: 10,
+            margin: new go.Margin(5,10,5,10),
             font: "14px sans-serif",
             textAlign: "center",
             wrap: go.TextBlock.WrapFit,
             minSize: new go.Size(100, 30),
             verticalAlignment: go.Spot.Center,
-        }, new go.Binding("text", "text"))
+            alignment: go.Spot.Center,
+        },
+        new go.Binding("text", "text", (text) => {
+            return marked.parse(text).replace(/<\/?[^>]+(>|$)/g, ""); // Remove tags HTML
+        }))
     );
 };

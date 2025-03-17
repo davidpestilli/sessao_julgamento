@@ -40,7 +40,10 @@
     text-align: center;
     position: relative;
     animation: fadeIn 0.3s ease-in-out;
+    max-height: 80vh; /* Defina uma altura máxima */
+    overflow-y: auto; /* Adiciona rolagem vertical */
 }
+
   
 /* --- Botão de fechar --- */
 .modal-close {

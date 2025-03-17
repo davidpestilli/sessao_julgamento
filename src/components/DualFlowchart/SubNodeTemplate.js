@@ -1,5 +1,6 @@
 import * as go from 'gojs';
 import { updateSubNodeColors } from './SubNodeSelectionHandler';
+import { marked } from 'marked';
 
 export const createSubNodeTemplate = (setSelectedNode) => {
   const $ = go.GraphObject.make;
@@ -38,13 +39,17 @@ export const createSubNodeTemplate = (setSelectedNode) => {
       strokeWidth: 2,
     }),
     $(go.TextBlock, {
-      margin: 10,
+      margin: new go.Margin(5,10,5,10),
       font: "14px sans-serif",
       textAlign: "center",
       wrap: go.TextBlock.WrapFit, // 🔥 Habilita a quebra de texto automática
       maxSize: new go.Size(120, NaN), // 🔥 Define uma largura máxima para forçar a quebra
       verticalAlignment: go.Spot.Center,
-    }, new go.Binding("text", "text"))
+      alignment: go.Spot.Center,
+  },
+  new go.Binding("text", "text", (text) => {
+      return marked.parse(text).replace(/<\/?[^>]+(>|$)/g, ""); // Remove tags HTML
+  }))
     
   );
 };
