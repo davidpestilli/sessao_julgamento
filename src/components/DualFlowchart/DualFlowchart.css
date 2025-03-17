@@ -32,12 +32,12 @@
 .reset-container {
   position: absolute;
   top: 10px;
-  right: 950px;
+  right: 50vw;
   z-index: 1001;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 24px;
+  font-size: 1.5rem;
   cursor: pointer;
   margin: 10px;
   user-select: none;
@@ -64,25 +64,42 @@
   color: #007BFF;
 }
 
+/* Melhorar espaçamento em telas menores */
+@media (max-width: 768px) {
+  .reset-container {
+    top: 5px;
+    right: 2vw; /* Diminui a margem lateral em telas pequenas */
+    font-size: 1.2rem; /* Reduz o tamanho */
+  }
+}
+
 /* Watermark blockers também com alto z-index */
 .watermark-blocker {
   position: absolute;
   background-color: rgb(255, 255, 255);
-  width: 280px;
-  height: 80px;
+  width: 20vw;
+  height: 10vh;
   z-index: 1000; /* menor que o reset para que o reset fique acima */
   pointer-events: none;
 }
 
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+  .watermark-blocker {
+    width: 25vw; /* Ajusta o tamanho para não deixar a mensagem visível */
+    height: 8vh;
+  }
+}
+
 .blocker-top {
   top: 10px;
-  left: 2%;
+  left: 5vw;
   transform: translateX(-50%);
 }
 
 .blocker-bottom {
-  bottom: 370px;
-  left: 2%;
+  bottom: 39vh;
+  left: 5vw;
   transform: translateX(-50%);
 }
 

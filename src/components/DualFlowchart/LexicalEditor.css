@@ -1,0 +1,43 @@
+/* Estilos do Editor Lexical */
+/* Estilo para os títulos */
+.editor-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Estilo para evitar o problema do Chrome com contenteditable */
+.editor-wrapper {
+    display: block;
+    padding: 8px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    max-height: 300px; /* 🔹 Define um limite máximo para o editor */
+    overflow-y: auto; /* 🔹 Adiciona rolagem caso o conteúdo ultrapasse o limite */
+    width: 100%;
+}
+
+/* Estilo para o editor */
+.editor-input {
+    min-height: 150px;
+    max-height: 280px; /* 🔹 Evita que o editor cresça indefinidamente */
+    font-size: 16px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    outline: none;
+    background: #fff;
+    width: 100%;
+    overflow-y: auto; /* 🔹 Adiciona rolagem interna */
+}
+
+/* Placeholder do editor */
+.editor-placeholder {
+    color: #aaa;
+    position: absolute;
+    padding: 10px;
+}
+

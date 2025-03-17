@@ -57,11 +57,16 @@ const UpperFlowchart = ({ onNodeSelect, selectedUpperNode, setSelectedUpperNode,
           Conteúdo
         </button>
       )}
-      <NodeModal
+        <NodeModal
         isOpen={isUpperModalOpen}
         onClose={() => setIsUpperModalOpen(false)}
-        content={selectedUpperNode ? `Informações sobre o nó: ${selectedUpperNode.text}` : "Nenhum nó selecionado"}
-      />
+            onModalClose={() => setSelectedUpperNode(null)} // Reseta o nó selecionado
+        content={selectedUpperNode ? selectedUpperNode.text : "Nenhum nó selecionado"}
+        description={selectedUpperNode ? selectedUpperNode.description : "Sem detalhes disponíveis."}
+        nodeKey={selectedUpperNode ? selectedUpperNode.key : null} // Adicionado
+        isUpperChart={true} // Adicionado - Upper Chart usa "Quem faz?"
+        />
+
     </div>
   );
 };

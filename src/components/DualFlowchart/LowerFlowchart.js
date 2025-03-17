@@ -72,7 +72,11 @@ const LowerFlowchart = ({ selectedUpperNodeKey }) => {
       <NodeModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        content={selectedNode ? `Informações sobre o nó: ${selectedNode.text}` : "Nenhum nó selecionado"}
+          onModalClose={() => setSelectedNode(null)} // Reseta o nó selecionado
+          content={selectedNode ? selectedNode.text : "Nenhum nó selecionado"}
+        description={selectedNode ? selectedNode.description : "Sem detalhes disponíveis."}
+        nodeKey={selectedNode ? selectedNode.key : null}
+        isUpperChart={false} // Lower Chart usa "Como faz?"
       />
     </div>
   );
