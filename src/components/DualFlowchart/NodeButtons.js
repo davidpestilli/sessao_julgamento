@@ -3,8 +3,8 @@ import React from 'react';
 const NodeButtons = ({ texts, isUpperChart, onEdit, onDisplay }) => {
     return (
         <>
-            <button className="modal-button" onClick={() => onDisplay("Por que esse serviço importa?", texts.whyImportant)}>
-                Por que esse serviço importa?
+            <button className="modal-button" onClick={() => onDisplay("De que se trata esse serviço?", texts.whyImportant)}>
+                De que se trata esse serviço?
             </button>
 
             <button className="modal-button" onClick={() => onDisplay("Quem faz esse serviço?", texts.whoDoes)}>
