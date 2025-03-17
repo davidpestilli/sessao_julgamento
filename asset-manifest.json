@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/sessao_julgamento/static/css/main.5fd0a276.css",
-    "main.js": "/sessao_julgamento/static/js/main.352e4ee8.js",
+    "main.css": "/sessao_julgamento/static/css/main.24ccc23b.css",
+    "main.js": "/sessao_julgamento/static/js/main.3e325c0e.js",
     "static/js/952.735f3e9f.chunk.js": "/sessao_julgamento/static/js/952.735f3e9f.chunk.js",
     "static/js/453.aa4ddc84.chunk.js": "/sessao_julgamento/static/js/453.aa4ddc84.chunk.js",
     "index.html": "/sessao_julgamento/index.html",
-    "main.5fd0a276.css.map": "/sessao_julgamento/static/css/main.5fd0a276.css.map",
-    "main.352e4ee8.js.map": "/sessao_julgamento/static/js/main.352e4ee8.js.map",
+    "main.24ccc23b.css.map": "/sessao_julgamento/static/css/main.24ccc23b.css.map",
+    "main.3e325c0e.js.map": "/sessao_julgamento/static/js/main.3e325c0e.js.map",
     "952.735f3e9f.chunk.js.map": "/sessao_julgamento/static/js/952.735f3e9f.chunk.js.map",
     "453.aa4ddc84.chunk.js.map": "/sessao_julgamento/static/js/453.aa4ddc84.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5fd0a276.css",
-    "static/js/main.352e4ee8.js"
+    "static/css/main.24ccc23b.css",
+    "static/js/main.3e325c0e.js"
   ]
 }
