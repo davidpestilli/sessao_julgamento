@@ -76,7 +76,7 @@ const LowerFlowchart = ({ selectedUpperNodeKey }) => {
           content={selectedNode ? selectedNode.text : "Nenhum nó selecionado"}
         description={selectedNode ? selectedNode.description : "Sem detalhes disponíveis."}
         nodeKey={selectedNode ? selectedNode.key : null}
-        isUpperChart={false} // Lower Chart usa "Como faz?"
+        isUpperChart={false} // // Mudança: permitir exibir "Quem faz?" na Lower Chart também
       />
     </div>
   );

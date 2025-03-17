@@ -28,8 +28,8 @@ const subFlowchartData = {
   },
   preparacao: {
     nodeDataArray: [
-      { key: 'sub-prep-1', text: 'Pauta' },
-      { key: 'sub-prep-2', text: 'Status da Sessão e Recursos' },
+      { key: 'sub-prep-1', text: 'Status da Sessão e Recursos' },
+      { key: 'sub-prep-2', text: 'Pauta' },
       { key: 'sub-prep-3', text: 'Painel da Sessão de Julgamento' },
       { key: 'sub-prep-4', text: 'Impedimentos' },
       { key: 'sub-prep-5', text: 'Quórum e Composição' },
@@ -38,7 +38,8 @@ const subFlowchartData = {
       { key: 'sub-prep-8', text: 'Relatório Geral da Sessão de Julgamento' },
       { key: 'sub-prep-9', text: 'Alteração de Data/Hora da Sessão' },
       { key: 'sub-prep-10', text: 'Aditamento' },
-      { key: 'sub-prep-11', text: 'Pedidos de Sustentação Oral e Preferência' }
+      { key: 'sub-prep-11', text: 'Pedidos de Sustentação Oral e Preferência' },
+      { key: 'sub-prep-12', text: 'Minutas: Relatório/Voto-Acórdão-Despacho' }
     ],
     linkDataArray: [
       { from: 'sub-prep-1', to: 'sub-prep-2' },
@@ -50,7 +51,8 @@ const subFlowchartData = {
       { from: 'sub-prep-7', to: 'sub-prep-8' },
       { from: 'sub-prep-8', to: 'sub-prep-9' },
       { from: 'sub-prep-9', to: 'sub-prep-10' },
-      { from: 'sub-prep-10', to: 'sub-prep-11' }
+      { from: 'sub-prep-10', to: 'sub-prep-11' },
+      { from: 'sub-prep-11', to: 'sub-prep-12' }
     ]
   },
   durante: {
@@ -58,13 +60,14 @@ const subFlowchartData = {
       { key: 'sub-dur-1', text: 'Abrir a Sessão' },
       { key: 'sub-dur-2', text: 'Exibição dos Itens em Julgamento' },
       { key: 'sub-dur-3', text: 'Tela de Resumo do Item da Sessão' },
-      { key: 'sub-dur-4', text: 'Atualizar Resultados da Sessão' },
-      { key: 'sub-dur-5', text: 'Automação dos Julgamentos Unânimes' },
-      { key: 'sub-dur-6', text: 'Confirmar Previsão de Resultado' },
-      { key: 'sub-dur-7', text: 'Lançamento dos Eventos de Julgamento' },
-      { key: 'sub-dur-8', text: 'Visualizar Resumo da Sessão de Julgamento' },
-      { key: 'sub-dur-9', text: 'Visualizar Estatísticas da Sessão de Julgamento' },
-      { key: 'sub-dur-10', text: 'Encerrar a Sessão' }
+      { key: 'sub-dur-4', text: 'Gerenciamento de Destaques no painel da Sessão de Julgamento' },
+      { key: 'sub-dur-5', text: 'Atualizar Resultados da Sessão' },
+      { key: 'sub-dur-6', text: 'Automação dos Julgamentos Unânimes' },
+      { key: 'sub-dur-7', text: 'Confirmar Previsão de Resultado' },
+      { key: 'sub-dur-8', text: 'Lançamento dos Eventos de Julgamento' },
+      { key: 'sub-dur-9', text: 'Visualizar Resumo da Sessão de Julgamento' },
+      { key: 'sub-dur-10', text: 'Visualizar Estatísticas da Sessão de Julgamento' },
+      { key: 'sub-dur-11', text: 'Encerrar a Sessão' }
     ],
     linkDataArray: [
       { from: 'sub-dur-1', to: 'sub-dur-2' },
@@ -75,7 +78,8 @@ const subFlowchartData = {
       { from: 'sub-dur-6', to: 'sub-dur-7' },
       { from: 'sub-dur-7', to: 'sub-dur-8' },
       { from: 'sub-dur-8', to: 'sub-dur-9' },
-      { from: 'sub-dur-9', to: 'sub-dur-10' }
+      { from: 'sub-dur-9', to: 'sub-dur-10' },
+      { from: 'sub-dur-10', to: 'sub-dur-11' }
     ]
   },
   pos: {

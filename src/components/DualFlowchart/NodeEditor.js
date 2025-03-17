@@ -18,9 +18,10 @@ const NodeEditor = ({ nodeKey, texts, isUpperChart, setTexts, onClose }) => {
     
         const updates = {
             why_important: newTexts.whyImportant || texts.whyImportant,
-            who_does: isUpperChart ? (newTexts.whoDoes || texts.whoDoes) : null,
-            how_does: isUpperChart ? null : (newTexts.howDoes || texts.howDoes),
+            who_does: newTexts.whoDoes || texts.whoDoes, // 🔹 Adicionar sempre "Quem faz?"
+            how_does: newTexts.howDoes || texts.howDoes, // 🔹 Adicionar sempre "Como faz?"
         };
+        
     
         console.log("📡 Verificando se node_key existe no banco:", nodeKey);
     
@@ -76,27 +77,38 @@ const NodeEditor = ({ nodeKey, texts, isUpperChart, setTexts, onClose }) => {
                 style={{ minHeight: "150px", fontSize: "16px", whiteSpace: "pre-wrap" }}
             />
 
-            {isUpperChart ? (
-                <>
-                    <label>Quem faz?</label>
-                    <input
-                        type="text"
-                        value={newTexts.whoDoes || texts.whoDoes}
-                        onChange={(e) => handleChange("whoDoes", e.target.value)}
-                        placeholder="Digite aqui quem faz..."
-                    />
-                </>
-            ) : (
-                <>
-                    <label>Como faz?</label>
-                    <textarea
-                        value={newTexts.howDoes || texts.howDoes}
-                        onChange={(e) => handleChange("howDoes", e.target.value)}
-                        placeholder="Digite aqui como faz..."
-                        style={{ minHeight: "150px", fontSize: "16px", whiteSpace: "pre-wrap" }}
-                    />
-                </>
-            )}
+{isUpperChart ? (
+    // 🔹 Upper Chart: Apenas "Quem faz?"
+    <>
+        <label>Quem faz?</label>
+        <input
+            type="text"
+            value={newTexts.whoDoes || texts.whoDoes}
+            onChange={(e) => handleChange("whoDoes", e.target.value)}
+            placeholder="Digite aqui quem faz..."
+        />
+    </>
+) : (
+    // 🔹 Lower Chart: "Quem faz?" + "Como faz?"
+    <>
+        <label>Quem faz?</label>
+        <input
+            type="text"
+            value={newTexts.whoDoes || texts.whoDoes}
+            onChange={(e) => handleChange("whoDoes", e.target.value)}
+            placeholder="Digite aqui quem faz..."
+        />
+
+        <label>Como faz?</label>
+        <textarea
+            value={newTexts.howDoes || texts.howDoes}
+            onChange={(e) => handleChange("howDoes", e.target.value)}
+            placeholder="Digite aqui como faz..."
+            style={{ minHeight: "150px", fontSize: "16px", whiteSpace: "pre-wrap" }}
+        />
+    </>
+)}
+
 
             {/* Botões de salvar e cancelar */}
             <button className="modal-button save" onClick={saveChanges}>

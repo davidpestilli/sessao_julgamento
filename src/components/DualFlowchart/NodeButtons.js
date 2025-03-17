@@ -7,11 +7,11 @@ const NodeButtons = ({ texts, isUpperChart, onEdit, onDisplay }) => {
                 Por que importa?
             </button>
 
-            {isUpperChart ? (
-                <button className="modal-button" onClick={() => onDisplay("Quem faz?", texts.whoDoes)}>
-                    Quem faz?
-                </button>
-            ) : (
+            <button className="modal-button" onClick={() => onDisplay("Quem faz?", texts.whoDoes)}>
+                Quem faz?
+            </button>
+
+            {!isUpperChart && ( // 🔹 "Como faz?" só aparece na Lower Chart
                 <button className="modal-button" onClick={() => onDisplay("Como faz?", texts.howDoes)}>
                     Como faz?
                 </button>
@@ -23,5 +23,7 @@ const NodeButtons = ({ texts, isUpperChart, onEdit, onDisplay }) => {
         </>
     );
 };
+
+
 
 export default NodeButtons;
