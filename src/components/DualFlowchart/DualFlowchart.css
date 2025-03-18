@@ -11,10 +11,11 @@
 .upper-flowchart-container,
 .lower-flowchart-container {
   flex: 1; /* Cada um ocupa metade da tela */
-  border: 2px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 3px solid #ddd;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   display: flex;
   overflow: hidden; /* Evita barras de rolagem desnecessárias */
+  border-radius: 12px;
 }
 
 .flowchart-container {
@@ -105,15 +106,15 @@
 
 .content-button {
   position: absolute;
-  bottom: 10px;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
   background: #6C5CE7;
   color: white;
   border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s ease-in-out;
   animation: buttonReload 0.5s ease-out;
@@ -122,6 +123,7 @@
 
 .content-button:hover {
   background: #4E44CE;
+
 }
 
 @keyframes buttonReload {

@@ -1,6 +1,6 @@
 // src/components/DualFlowchart/UpperNodeSelectionHandler.js
 export function updateUpperNodeColors(diagram, selectedKey) {
-    const defaultColor = "#70A1FF"; // 🔵 Azul claro para os nós padrão
+    const defaultColor = "#D4EDDA"; // 🔵 Azul claro para os nós padrão
     const gray = "#BDC3C7"; // 🔘 Cinza para os não selecionados
 
     console.log(`🎨 Atualizando cores do UpperFlowchart: Nó selecionado -> ${selectedKey}`);

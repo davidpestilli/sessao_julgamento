@@ -1,6 +1,6 @@
 // src/components/DualFlowchart/SubNodeSelectionHandler.js
 export function updateSubNodeColors(diagram, selectedKey) {
-  const defaultColor = "#9B59B6"; // 🟣 Roxo para os nós padrão
+  const defaultColor = "#FFF9C4"; // 🟣 Roxo para os nós padrão
   const gray = "#BDC3C7"; // 🔘 Cinza para os não selecionados
 
   console.log(`🎨 Atualizando cores na LowerFlowchart: Nó selecionado -> ${selectedKey}`);

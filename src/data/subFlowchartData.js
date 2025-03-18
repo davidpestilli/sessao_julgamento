@@ -39,7 +39,7 @@ const subFlowchartData = {
       { key: 'sub-prep-9', text: 'Alteração de Data/Hora da Sessão' },
       { key: 'sub-prep-10', text: 'Aditamento' },
       { key: 'sub-prep-11', text: 'Pedidos de Sustentação Oral e Preferência' },
-      { key: 'sub-prep-12', text: 'Minutas: Relatório/Voto-Acórdão-Despacho' }
+      { key: 'sub-prep-12', text: 'Minutas: Relatório/Voto, Acórdão e Despacho' }
     ],
     linkDataArray: [
       { from: 'sub-prep-1', to: 'sub-prep-2' },
