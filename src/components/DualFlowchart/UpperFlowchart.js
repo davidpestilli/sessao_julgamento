@@ -13,19 +13,19 @@ const UpperFlowchart = ({ onNodeSelect, selectedUpperNode, setSelectedUpperNode,
 
   // Funções para abrir os links dos documentos
   const handleIconClick1 = () => {
-    window.open('https://link1.com', '_blank');
+    window.open('https://tjsp.sharepoint.com/:w:/t/GRP_SJ7/ERoeGBUBLYVJhOoqZJG1uxUB1FuYPOyu0wrJ5iBy4OSk5A?e=hrQJrl', '_blank');
   };
 
   const handleIconClick2 = () => {
-    window.open('https://link2.com', '_blank');
+    window.open('https://tjsp.sharepoint.com/:w:/t/GRP_SJ7/EQmHU5MtFetLlVofgrUXWsIBXFglhJvBaL70IJoFNcviJQ?e=Qf0CWm', '_blank');
   };
 
   const handleIconClick3 = () => {
-    window.open('https://link3.com', '_blank');
+    window.open('https://tjsp.sharepoint.com/:w:/t/GRP_SJ7/EfwfzX7OlNRPhMx7YVlbl38BTl-gxVgZ4JfcQ-xwMJAeLg?e=Li2Guu', '_blank');
   };
 
   const handleIconClick4 = () => {
-    window.open('https://link4.com', '_blank');
+    window.open('https://tjsp.sharepoint.com/:w:/t/GRP_SJ7/EXMVTQsLA-5Oh9VjMFbDJJABQNGpRYqXmlCcnpDkxYtSLA?e=aELSeD', '_blank');
   };
 
   useEffect(() => {
@@ -77,10 +77,10 @@ const UpperFlowchart = ({ onNodeSelect, selectedUpperNode, setSelectedUpperNode,
 
     {/* Container para os 4 ícones, posicionados no canto direito e centralizados verticalmente */}
     <div className="icon-container">
-      <DocumentLinkIcon docName="Basico 2G - Aula 22 - Sessão de Julgamento - Secretaria" onClick={handleIconClick1} />
-      <DocumentLinkIcon docName="Basico 2G - Aula 23 -  Sessão de Julgamento documento - Gabinete" onClick={handleIconClick2} />
-      <DocumentLinkIcon docName="Dia 06 - Sessão de Julgamento" onClick={handleIconClick3} />
-      <DocumentLinkIcon docName="Sessao_Julgamento dia 14.03.25" onClick={handleIconClick4} />
+      <DocumentLinkIcon docName="Basico 2G - Aula 22 - SC - Sessão de Julgamento - Secretaria" onClick={handleIconClick1} />
+      <DocumentLinkIcon docName="Basico 2G - Aula 23 -  SC - Sessão de Julgamento documento - Gabinete" onClick={handleIconClick2} />
+      <DocumentLinkIcon docName="Sexta Aula - Sessão de Julgamento - SP - JEC/Col. Recursal" onClick={handleIconClick3} />
+      <DocumentLinkIcon docName="Sessao_Julgamento - Teams - dia 14.03.25 SP/SC" onClick={handleIconClick4} />
     </div>
 
     {selectedUpperNode && (

@@ -9,9 +9,9 @@
   .document-icon:hover::after {
     content: attr(data-title);
     position: absolute;
-    bottom: 110%; /* Posiciona o tooltip acima do ícone */
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 0%; /* Posiciona o tooltip acima do ícone */
+    right: calc(100% + 1px); /* Posiciona à esquerda do ícone com um espaçamento de 10px */
+    transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.75);
     color: #fff;
     padding: 5px 10px;

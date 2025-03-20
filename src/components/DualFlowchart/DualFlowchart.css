@@ -142,7 +142,7 @@
 .icon-container {
   position: absolute;
   right: 10px;
-  top: calc(50% + 80px);
+  top: calc(50% + 10px);
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
