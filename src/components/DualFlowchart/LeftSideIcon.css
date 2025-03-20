@@ -1,0 +1,31 @@
+.left-side-icon {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding: 4px;
+  }
+  
+  /* Tooltip: aparece à direita do ícone */
+  .left-side-icon:hover::after {
+    content: attr(data-title);
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 10px);
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 14px;
+    z-index: 100;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
