@@ -12,8 +12,8 @@ const NodeButtons = ({ texts, isUpperChart, onEdit, onDisplay }) => {
             </button>
 
             {!isUpperChart && ( // 🔹 "Como esse serviço é feito?" só aparece na Lower Chart
-                <button className="modal-button" onClick={() => onDisplay("Como esse serviço é feito?", texts.howDoes)}>
-                    Como esse serviço é feito?
+                <button className="modal-button" onClick={() => onDisplay("Sugestão para testes", texts.howDoes)}>
+                    Sugestão para Testes
                 </button>
             )}
 

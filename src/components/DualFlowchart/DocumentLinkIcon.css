@@ -1,0 +1,31 @@
+.document-icon {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding: 4px;
+  }
+  
+  /* Exibe o tooltip com o nome do documento ao fazer hover */
+  .document-icon:hover::after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: 110%; /* Posiciona o tooltip acima do ícone */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 14px;
+    z-index: 100;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  

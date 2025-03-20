@@ -32,8 +32,8 @@
 /* Reset container com alto z-index para ficar visível acima dos outros elementos */
 .reset-container {
   position: absolute;
-  top: 10px;
-  right: 50vw;
+  top: 35px;
+  right: 48vw;
   z-index: 1001;
   display: flex;
   flex-direction: column;
@@ -56,7 +56,7 @@
 
 .reset-container span {
   font-size: 14px;
-  margin-top: 5px;
+  margin-top: 2px;
   color: #333;
   transition: color 0.2s ease;
 }
@@ -64,6 +64,18 @@
 .reset-container:hover span {
   color: #007BFF;
 }
+
+.upper-chart-title {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 1300;
+  pointer-events: none;
+}
+
 
 /* Melhorar espaçamento em telas menores */
 @media (max-width: 768px) {
@@ -125,6 +137,19 @@
   background: #4E44CE;
 
 }
+
+/* Container dos ícones: posicionado no canto direito, centralizado verticalmente */
+.icon-container {
+  position: absolute;
+  right: 10px;
+  top: calc(50% + 80px);
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1100; /* Ajuste o z-index conforme necessário para garantir visibilidade */
+}
+
 
 @keyframes buttonReload {
   from {
