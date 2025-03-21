@@ -43,13 +43,7 @@ const UpperFlowchart = ({ onNodeSelect, selectedUpperNode, setSelectedUpperNode,
   // Alteração: em vez de abrir um link, abre o modal de contato
   const handleContactDevelopers = () => { setIsDevModalOpen(true); };
 
-  const handleChatGPT1 = () => {
-    window.open('https://chatgpt.com/g/g-67d027ddf5488191a1c7207dd4a7d2a8-guia-eproc-tribunais', '_blank');
-  };
 
-  const handleChatGPT2 = () => {
-    window.open('https://chatgpt.com/g/g-677bcc1e5d5c819196bed92c853f2837-guia-eproc-sao-paulo', '_blank');
-  };
 
   useEffect(() => {
     if (diagramInstance.current) {
@@ -103,8 +97,6 @@ const UpperFlowchart = ({ onNodeSelect, selectedUpperNode, setSelectedUpperNode,
         <LeftSideIcon iconType="companion" docName="Gerenciador de Testes" onClick={handleCompanionApp} />
         <LeftSideIcon iconType="bug" docName="Relatar Bugs" onClick={handleBugReport} />
         <LeftSideIcon iconType="contact" docName="Contato" onClick={handleContactDevelopers} />
-        <LeftSideIcon iconType="chatgpt" docName="ChatGPT SP" onClick={handleChatGPT1} />
-        <LeftSideIcon iconType="chatgpt" docName="ChatGPT Tribunais" onClick={handleChatGPT2} />
       </div>
 
     {/* Container para os 4 ícones, posicionados no canto direito e centralizados verticalmente */}

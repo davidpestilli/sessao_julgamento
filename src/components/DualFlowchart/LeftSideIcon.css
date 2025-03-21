@@ -1,9 +1,11 @@
+/* LeftSideIcon.css */
 .left-side-icon {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    padding: 4px;
-  }
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px; /* aumento para acomodar o tamanho maior */
+}
+
   
   /* Tooltip: aparece à direita do ícone */
   .left-side-icon:hover::after {

@@ -1,9 +1,11 @@
+/* DocumentLinkIcon.css */
 .document-icon {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    padding: 4px;
-  }
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px; /* aumento para melhor espaçamento */
+}
+
   
   /* Exibe o tooltip com o nome do documento ao fazer hover */
   .document-icon:hover::after {
