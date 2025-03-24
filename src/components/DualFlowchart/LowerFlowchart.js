@@ -27,7 +27,7 @@ const LowerFlowchart = ({ selectedUpperNodeKey }) => {
       setButtonKey(Date.now());
     });
   }, []);
-
+  
   useEffect(() => {
     if (!diagramInstance.current) {
       console.log("⚠️ LowerFlowchart: Tentativa de atualização antes da inicialização.");
@@ -35,6 +35,12 @@ const LowerFlowchart = ({ selectedUpperNodeKey }) => {
     }
 
     console.log("🔍 Buscando dados para a chave selecionada:", selectedUpperNodeKey);
+
+    const diagram = diagramInstance.current; 
+
+    diagram.allowVerticalScroll = false; 
+    diagram.toolManager.panningTool.isEnabled = false;
+
 
     if (!selectedUpperNodeKey) {
       console.log("⚠️ Nenhuma chave selecionada. O diagrama será limpo.");

@@ -61,6 +61,11 @@ const UpperFlowchart = ({ onNodeSelect, selectedUpperNode, setSelectedUpperNode,
 
     diagramInstance.current = diagram;
 
+    // Desabilitar a rolagem e o panning para fixar o fluxograma 
+    diagram.allowHorizontalScroll = false; 
+    diagram.allowVerticalScroll = false; 
+    diagram.toolManager.panningTool.isEnabled = false;
+
     // Cria o template do nó com o callback que atualiza a seleção e a cor
     diagram.nodeTemplate = createUpperNodeTemplate((nodeData) => {
       console.log("🔔 Nó da upper chart clicado:", nodeData);

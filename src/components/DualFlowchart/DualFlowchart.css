@@ -16,6 +16,7 @@
   display: flex;
   overflow: hidden; /* Evita barras de rolagem desnecessárias */
   border-radius: 12px;
+  overflow-y: hidden;
 }
 
 .flowchart-container {
